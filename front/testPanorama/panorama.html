@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panorama Viewer</title>
+<style>
+  body{
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+  }
+  #panorama-container {
+ 
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+  }
+  #panorama {
+    width: auto;
+    height: auto;
+    max-width: none;
+    max-height: none;
+    position: absolute;
+  }
+</style>
+</head>
+<body>
+<div id="panorama-container">
+  <img id="panorama" src="vecteezy_a-modern-apartment-empty-entrance-hall-with-pink-glass-door_25489679.jpg" alt="Panorama">
+</div>
+
+<script>
+  const panorama = document.getElementById('panorama');
+  const container = document.getElementById('panorama-container');
+
+  let isDragging = false;
+  let startX;
+  let startY;
+
+  container.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    startX = container.scrollLeft - e.clientX;
+    startY = container.scrollTop - e.clientY;
+  });
+
+  container.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+
+  container.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = startX + e.clientX;
+    const y = startY + e.clientY;
+    container.scrollLeft = x;
+    container.scrollTop = y;
+  });
+
+  container.addEventListener('mouseleave', () => {
+    isDragging = false;
+  });
+</script>
+</body>
+</html>
