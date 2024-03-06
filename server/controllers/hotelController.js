@@ -1,6 +1,4 @@
 const path = require("path");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const Hotel = require("../models/model.js");
 const ApiError = require("../error/errorApi.js");
 require("dotenv").config();
