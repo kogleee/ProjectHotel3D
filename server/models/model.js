@@ -84,7 +84,7 @@ class User {
     }
   }
 
-  async Find(date = null, residentCount = null) {
+  async Find(date = null, residentCount = null, price = null, rating = null) {
     if (date) {
       date = await this.formatDateToISO(date);
     }
@@ -97,9 +97,15 @@ class User {
              LEFT JOIN reservation ON reservation.hotel_id = hotel.id
              WHERE ((reservation.start_date IS NULL OR reservation.start_date > ? OR ? IS NULL)
              OR (reservation.end_date IS NULL OR reservation.end_date < ? OR ? IS NULL))
-             AND (hotel.resident_count > ? OR ? IS NULL)
-             GROUP BY hotel.id , hotel.name`,
-        [date, date, date, date, +residentCount, +residentCount]
+             AND (hotel.resident_count >= ? OR ? IS NULL)
+             GROUP BY hotel.id , hotel.name
+             ORDER BY 
+            CASE 
+                WHEN ? = true THEN hotel.cost 
+                WHEN ? = false THEN AVG(rating.rating) 
+                ELSE NULL 
+            END`,
+        [date, date, date, date, +residentCount, +residentCount, price, rating]
       );
       return rows;
     } catch (e) {
@@ -145,7 +151,7 @@ class User {
     try {
       const [rows, fields] = await this.connection
         .promise()
-        .query("SELECT * FROM reservation");
+        .query("select * from favourite_hotel");
       return rows;
     } catch (e) {
       console.log(e);
@@ -165,6 +171,71 @@ class User {
       console.log("Успешно удалены", rows.affectedRows, "записей");
     } catch (e) {
       console.log(e);
+    }
+  }
+
+  //Избранное
+  async getFavourites(id) {
+    try {
+      const [rows, fields] = await this.connection.promise().query(
+        `SELECT hotel.*, AVG(rating.rating) from hotel
+        LEFT JOIN favourite_hotel ON hotel.id = favourite_hotel.hotel_id
+        LEFT JOIN favourite ON favourite_hotel.favourite_id = favourite.id 
+        LEFT JOIN rating ON rating.hotel_id = hotel.id
+        WHERE favourite.user_id = ?
+        GROUP BY hotel.id, hotel.name`,
+        [id.id]
+      );
+      return rows;
+    } catch (e) {
+      console.log(e);
+      return;
+    }
+  }
+
+  async CreateFavourite(data) {
+    let [searchRow, searchFields] = await this.connection.promise().query(
+      `SELECT favourite_hotel.* FROM favourite_hotel 
+        JOIN favourite ON favourite.id = favourite_hotel.favourite_id
+         WHERE favourite.user_id = ? AND favourite_hotel.hotel_id = ?`,
+      [data.id, data.hotelId]
+    );
+    if (searchRow[0]) {
+      return "Уже добавлено";
+    }
+
+    let [favouriteId, columns] = await this.connection
+      .promise()
+      .query(`SELECT id FROM favourite WHERE user_id = ?`, [data.id]);
+    try {
+      const [rows, fields] = await this.connection
+        .promise()
+        .query(
+          `INSERT INTO favourite_hotel (hotel_id, favourite_id) VALUES (?,?)`,
+          [data.hotelId, favouriteId[0].id]
+        );
+      return rows;
+    } catch (e) {
+      console.log(e);
+      return;
+    }
+  }
+
+  async DeleteFavourite(data) {
+    let [favouriteId, columns] = await this.connection
+      .promise()
+      .query(`SELECT id FROM favourite WHERE user_id = ?`, [data.id]);
+    try {
+      const [rows, fields] = await this.connection
+        .promise()
+        .query(
+          `DELETE FROM favourite_hotel WHERE hotel_id = ? AND favourite_id = ?`,
+          [data.hotelId, favouriteId[0].id]
+        );
+      return rows;
+    } catch (e) {
+      console.log(e);
+      return;
     }
   }
 
