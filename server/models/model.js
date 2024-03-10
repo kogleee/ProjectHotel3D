@@ -43,6 +43,7 @@ class User {
         .query("SELECT * FROM user WHERE id=?", [insertUser[0].insertId]);
       return rows[0];
     } catch (err) {
+      console.log(err);
       return;
     }
   }
@@ -76,7 +77,7 @@ class User {
       const [rows, fields] = await this.connection
         .promise()
         .query(
-          "SELECT hotel.*, AVG(rating.rating) AS 'average_rating' FROM hotel JOIN rating ON hotel.id = rating.hotel_id GROUP BY hotel.id, hotel.name;"
+          "SELECT hotel.*, AVG(rating.rating) AS 'average_rating' FROM hotel LEFT JOIN rating ON hotel.id = rating.hotel_id GROUP BY hotel.id, hotel.name;"
         );
       return rows;
     } catch (e) {
@@ -151,7 +152,7 @@ class User {
     try {
       const [rows, fields] = await this.connection
         .promise()
-        .query("select * from favourite_hotel");
+        .query("DELETE FROM user where email='omaygad1@mail.ru'");
       return rows;
     } catch (e) {
       console.log(e);
@@ -232,6 +233,73 @@ class User {
           `DELETE FROM favourite_hotel WHERE hotel_id = ? AND favourite_id = ?`,
           [data.hotelId, favouriteId[0].id]
         );
+      return rows;
+    } catch (e) {
+      console.log(e);
+      return;
+    }
+  }
+
+  //Reservation бронирование
+
+  async getReservation(user) {
+    try {
+      const [rows, fields] = await this.connection.promise().query(
+        `SELECT hotel.*, reservation.* FROM hotel
+         JOIN reservation ON reservation.hotel_id = hotel.id
+         WHERE reservation.user_id = ?`,
+        [user.id]
+      );
+      return rows;
+    } catch (e) {
+      console.log(e);
+      return;
+    }
+  }
+
+  async createReservation({
+    userId,
+    hotelId,
+    startDate,
+    endDate,
+    residentCount,
+  }) {
+    let [checkRows, checkFields] = await this.connection
+      .promise()
+      .query(`SELECT * FROM reservation WHERE user_id = ?`, [userId]);
+    if (checkRows[0]) {
+      return "Уже добавлено";
+    }
+
+    let [maxCount, hui] = await this.connection
+      .promise()
+      .query(`SELECT resident_count FROM hotel WHERE id = ?`, [hotelId]);
+    if (maxCount[0].resident_count < residentCount) {
+      return;
+    }
+
+    try {
+      const [rows, fields] = await this.connection.promise().query(
+        `INSERT INTO reservation (hotel_id,user_id, start_date, end_date, resident_count)
+        VALUES (?,?,?,?,?)`,
+        [hotelId, userId, startDate, endDate, residentCount]
+      );
+      return rows;
+    } catch (e) {
+      console.log(e);
+      return;
+    }
+  }
+
+  async deleteReservation({ userId, hotelId }) {
+    console.log(userId, hotelId);
+    try {
+      const [rows, fields] = await this.connection
+        .promise()
+        .query(`DELETE FROM reservation WHERE user_id = ? AND hotel_id = ?`, [
+          userId,
+          hotelId,
+        ]);
       return rows;
     } catch (e) {
       console.log(e);

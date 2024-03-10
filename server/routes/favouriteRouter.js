@@ -6,7 +6,7 @@ const authMiddleware = require("../middleware/authMiddleware.js");
 favouriteRouter.get("/show", authMiddleware, FavouriteController.Show);
 favouriteRouter.post("/add/:hotel?", authMiddleware, FavouriteController.Add);
 favouriteRouter.delete(
-  "/delete:hotel?",
+  "/delete/:hotel?",
   authMiddleware,
   FavouriteController.Delete
 );
