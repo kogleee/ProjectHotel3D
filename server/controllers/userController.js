@@ -1,5 +1,5 @@
 const path = require("path");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Model = require("../models/model.js");
 const ApiError = require("../error/errorApi.js");

@@ -105,7 +105,7 @@ class User {
                 WHEN ? = true THEN hotel.cost 
                 WHEN ? = false THEN AVG(rating.rating) 
                 ELSE NULL 
-            END`,
+            END DESC`,
         [date, date, date, date, +residentCount, +residentCount, price, rating]
       );
       return rows;
@@ -179,7 +179,7 @@ class User {
   async getFavourites(id) {
     try {
       const [rows, fields] = await this.connection.promise().query(
-        `SELECT hotel.*, AVG(rating.rating) from hotel
+        `SELECT hotel.*, AVG(rating.rating) as average_rating from hotel
         LEFT JOIN favourite_hotel ON hotel.id = favourite_hotel.hotel_id
         LEFT JOIN favourite ON favourite_hotel.favourite_id = favourite.id 
         LEFT JOIN rating ON rating.hotel_id = hotel.id
