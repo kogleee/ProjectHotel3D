@@ -1,15 +1,30 @@
-.hotel{
-    width: 60%;
-    display:flex;
-    justify-content: center;
+.hotel {
+  width: 80%;
+  display: flex;
+  justify-content: center;
 }
 
-.hotel--view{
-    width: 60%;
+.hotel--view {
+  width: 60%;
 }
 
-.title{
-    margin-top: 50px;
-    text-align: center;
-    font-size: 26px;
+.title {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 26px;
+}
+
+@media (max-width: 900px) {
+  .hotel {
+    width: 100%;
+  }
+  .hotel--view {
+    width: 80%;
+  }
+}
+
+@media (max-width: 600px) {
+  .hotel--view {
+    width: 100%;
+  }
 }

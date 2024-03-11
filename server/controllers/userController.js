@@ -43,7 +43,7 @@ class UserController {
     if (!user) {
       return next(ApiError.badRequest("Ошибка регистрации"));
     }
-    const favourite = await Model.CreateFavourite({ id: user.id });
+    const favourite = await Model.addFavourite({ id: user.id });
     const token = generateJwt(user.id, user.email);
     res.json(token);
   }

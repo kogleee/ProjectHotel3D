@@ -22,7 +22,7 @@ header {
 
 .header--menuBtn {
   display: grid;
-  grid-template-columns: 10% 33% 33%;
+  grid-template-columns: 33% 33%;
   align-items: center;
   justify-content: right;
 }
@@ -35,12 +35,11 @@ header {
 }
 
 .header--logo {
-
   font-size: 36px;
   cursor: pointer;
   width: 50%;
 }
-.header--logo a{
+.header--logo a {
   text-decoration: none;
   color: #113272;
 }
@@ -51,7 +50,7 @@ header {
   height: 35px;
   cursor: pointer;
 }
-.add-favourite svg{
+.add-favourite svg {
   cursor: pointer;
 }
 
@@ -78,10 +77,6 @@ header {
   margin-left: 10px;
 }
 
-#rub-modal {
-  display: none;
-}
-
 .burger-menu {
   display: none;
 }
@@ -91,7 +86,7 @@ header {
 
 @media (max-width: 1200px) {
   .header--menuBtn {
-    grid-template-columns: 10% 30% 40%;
+    grid-template-columns: 30% 30%;
   }
   .nav {
     grid-template-columns: 30% 80% 10%;

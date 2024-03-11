@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../mainPage/style.css" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <nav class="header--container">
+        <ul class="nav">
+          <li class="header--logo">
+            <a href="../../mainPage/index.html">TravelNest</a>
+          </li>
+          <ul class="header--menuBtn">
+            <li class="close-menu" id="close-burger"></li>
+            <li class="header--favourite">
+              <a href="../favourite/index.html"
+                ><svg
+                  width="31"
+                  height="29"
+                  viewBox="0 0 31 29"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M13.9338 0.706563C14.1473 0.273962 14.5879 0 15.0704 0C15.5529 0 15.9935 0.273888 16.207 0.706563L20.1774 8.75148L29.0556 10.0415C29.533 10.1109 29.9296 10.4453 30.0787 10.9042C30.2278 11.363 30.1035 11.8667 29.758 12.2034L23.3337 18.4656L24.8503 27.3078C24.9319 27.7833 24.7364 28.2639 24.3461 28.5474C23.9558 28.8309 23.4383 28.8684 23.0113 28.6438L15.0705 24.4691L7.12955 28.644C6.70251 28.8685 6.18503 28.8311 5.79472 28.5475C5.40441 28.264 5.20896 27.7834 5.29048 27.3079L6.80707 18.4656L0.382806 12.2035C0.0373537 11.8668 -0.0870412 11.363 0.0620864 10.9042C0.211141 10.4454 0.607814 10.111 1.08527 10.0416L9.96341 8.75155L13.9338 0.706563Z"
+                    fill="#FFD422"
+                  />
+                  <path
+                    d="M30.0786 10.9042C29.9295 10.4454 29.5329 10.111 29.0554 10.0416L20.1773 8.75154L16.2069 0.706624C15.9934 0.274023 15.5528 6.10352e-05 15.0703 6.10352e-05C14.9858 6.10352e-05 15.0703 24.4693 15.0703 24.4693L23.0111 28.6441C23.4382 28.8685 23.9557 28.8312 24.346 28.5476C24.7363 28.264 24.9317 27.7835 24.8502 27.308L23.3336 18.4657L29.7579 12.2036C30.1034 11.8668 30.2277 11.363 30.0786 10.9042Z"
+                    fill="#EEBF00"
+                  /></svg
+              ></a>
+            </li>
+
+            <li class="header--cab">
+              <a href="../lichKab/index.html">Личный кабинет</a>
+            </li>
+          </ul>
+          <p class="burger-menu" id="burger"></p>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="option-menu">
+          <h2>Личный кабинет</h2>
+          <hr />
+          <ul>
+            <li><a href="../index.html">Мои отели</a></li>
+            <li class="active">Личная информация</li>
+            <li><a href="">Безопасность</a></li>
+          </ul>
+        </div>
+        <div class="option-content">
+          <form action="">
+            <div class="form--main">
+              <div>
+                <label for="">Имя</label>
+                <input type="text" value="Иван" />
+              </div>
+              <div>
+                <label for="">Фамилия</label>
+                <input type="text" value="Иванов" />
+              </div>
+              <div>
+                <label for="">Номер телефона</label>
+                <input type="tel" value="89814224213" />
+              </div>
+            </div>
+            <button class="button">Изменить</button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../kab.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>

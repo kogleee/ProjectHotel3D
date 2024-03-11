@@ -4,6 +4,7 @@ const ApiError = require("../error/errorApi.js");
 require("dotenv").config();
 
 Model.StartCleanUp();
+Model.Ping();
 
 class hotelController {
   async Show(req, res, next) {
@@ -23,23 +24,33 @@ class hotelController {
     res.json(hotels);
   }
 
-  // async Create(req, res, next) {
-  //   const panoramaImg = "/panorama/pan2.html";
-  //   let hotelImg = "/img/hotel2.png";
-  //   let name = "Лунное озеро";
-  //   let description = "Комфортабельный 1-но местный номер";
-  //   let cost = 2000;
-  //   let residentCount = 1;
-  //   let newHotel = await Hotel.CreateHotel({
-  //     name,
-  //     description,
-  //     cost,
-  //     panoramaImg,
-  //     hotelImg,
-  //     residentCount,
-  //   });
-  //   res.json({ newHotel });
-  // }
+  async SetRating(req, res, next) {
+    let { hotel, rating } = req.query;
+    let userId = req.user.id;
+    let Resrating = await Model.createRating({ hotel, rating, userId });
+    if (!Resrating) {
+      return next(ApiError.internal("Вы уже поставили оценку"));
+    }
+    return res.json(Resrating);
+  }
+
+  async Create(req, res, next) {
+    const panoramaImg = "/panorama/pan4.html";
+    let hotelImg = "/img/hotel4.png";
+    let name = "Солнечный берег";
+    let description = "Комфортабельный 3-ёх местный номер";
+    let cost = 5000;
+    let residentCount = 3;
+    let newHotel = await Model.CreateHotel({
+      name,
+      description,
+      cost,
+      panoramaImg,
+      hotelImg,
+      residentCount,
+    });
+    res.json({ newHotel });
+  }
 
   async Dev(req, res, next) {
     let dev = await Model.check();

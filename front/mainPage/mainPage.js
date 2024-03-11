@@ -4,11 +4,7 @@ let menu = document.querySelector(".header--menuBtn");
 
 if (window.innerWidth < 560) {
   let favourite = document.querySelector(".header--favourite");
-  favourite.innerHTML = "<a href=''>Избранное</a>";
-}
-if (window.innerWidth < 560) {
-  let rub = document.querySelector(".header--rub");
-  rub.innerHTML = "<a href=''>Пополнить</a>";
+  favourite.innerHTML = "<a href='../favourite/index.html'>Избранное</a>";
 }
 
 burger.addEventListener("click", () => {
@@ -17,14 +13,4 @@ burger.addEventListener("click", () => {
 
 closeBurger.addEventListener("click", () => {
   menu.classList.remove("active");
-});
-
-let rub = document.querySelector(".header--rub");
-let rubModal = document.querySelector("#rub-modal");
-rub.addEventListener("mousemover", (e) => {
-  if (e.target == rub || e.target == rubModal) {
-    rubModal.style.display = "block";
-  } else {
-    rubModal.style.display = "none";
-  }
 });

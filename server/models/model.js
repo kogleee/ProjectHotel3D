@@ -85,9 +85,18 @@ class User {
     }
   }
 
-  async Find(date = null, residentCount = null, price = null, rating = null) {
+  async Find(date = null, residentCount = null, price, rating) {
     if (date) {
       date = await this.formatDateToISO(date);
+    }
+    let order;
+    if (price == "true") {
+      order = "hotel.cost";
+    } else if (rating == "true") {
+      order = "AVG(rating.rating)";
+      console.log(234);
+    } else {
+      order = "hotel.cost";
     }
 
     console.log(residentCount);
@@ -100,14 +109,10 @@ class User {
              OR (reservation.end_date IS NULL OR reservation.end_date < ? OR ? IS NULL))
              AND (hotel.resident_count >= ? OR ? IS NULL)
              GROUP BY hotel.id , hotel.name
-             ORDER BY 
-            CASE 
-                WHEN ? = true THEN hotel.cost 
-                WHEN ? = false THEN AVG(rating.rating) 
-                ELSE NULL 
-            END DESC`,
-        [date, date, date, date, +residentCount, +residentCount, price, rating]
+             ORDER BY ${order} DESC`,
+        [date, date, date, date, +residentCount, +residentCount]
       );
+      console.log(price, rating);
       return rows;
     } catch (e) {
       console.log(e);
@@ -152,7 +157,7 @@ class User {
     try {
       const [rows, fields] = await this.connection
         .promise()
-        .query("DELETE FROM user where email='omaygad1@mail.ru'");
+        .query("DELETE FROM hotel WHERE id = 8");
       return rows;
     } catch (e) {
       console.log(e);
@@ -175,6 +180,31 @@ class User {
     }
   }
 
+  async createRating(data) {
+    let [checkR, checkF] = await this.connection
+      .promise()
+      .query(`SELECT * FROM rating WHERE user_id = ? AND hotel_id = ?`, [
+        data.userId,
+        data.hotel,
+      ]);
+    console.log(checkR);
+    if (checkR[0]) {
+      return;
+    }
+    try {
+      let [rows, fields] = await this.connection
+        .promise()
+        .query(
+          `INSERT INTO rating (hotel_id, user_id, rating) VALUES (?,?,?)`,
+          [data.hotel, data.userId, data.rating]
+        );
+      return rows;
+    } catch (e) {
+      console.log(e);
+      return;
+    }
+  }
+
   //Избранное
   async getFavourites(id) {
     try {
@@ -188,6 +218,20 @@ class User {
         [id.id]
       );
       return rows;
+    } catch (e) {
+      console.log(e);
+      return;
+    }
+  }
+
+  async addFavourite(data) {
+    try {
+      const [rows, fields] = this.connection.promise().query(
+        `
+      INSERT INTO favourite (user_id) VALUES (?)
+      `,
+        [data.id]
+      );
     } catch (e) {
       console.log(e);
       return;
@@ -264,11 +308,17 @@ class User {
     endDate,
     residentCount,
   }) {
-    let [checkRows, checkFields] = await this.connection
-      .promise()
-      .query(`SELECT * FROM reservation WHERE user_id = ?`, [userId]);
+    let [checkRows, checkFields] = await this.connection.promise().query(
+      `SELECT * FROM reservation
+       WHERE hotel_id = ?
+       AND (start_date < ? AND ? < end_date)
+       OR (start_date < ? AND ? < end_date)
+       OR (start_date > ? AND end_date < ?)
+       `,
+      [hotelId, startDate, startDate, endDate, endDate, startDate, endDate]
+    );
     if (checkRows[0]) {
-      return "Уже добавлено";
+      return "Неверный диапазон";
     }
 
     let [maxCount, hui] = await this.connection
@@ -318,6 +368,18 @@ class User {
     setInterval(() => {
       this.removeExpiredReservations();
     }, 24 * 60 * 60 * 1000);
+  }
+
+  async Ping() {
+    setInterval(() => {
+      this.connection.ping((err) => {
+        if (err) {
+          console.error("Ошибка при отправке запроса ping:", err);
+        } else {
+          console.log("Запрос ping успешно отправлен");
+        }
+      });
+    }, 60000);
   }
 }
 
