@@ -1,0 +1,15 @@
+.hotel{
+    width: 60%;
+    display:flex;
+    justify-content: center;
+}
+
+.hotel--view{
+    width: 60%;
+}
+
+.title{
+    margin-top: 50px;
+    text-align: center;
+    font-size: 26px;
+}

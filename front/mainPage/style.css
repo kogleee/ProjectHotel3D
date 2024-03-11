@@ -35,16 +35,23 @@ header {
 }
 
 .header--logo {
-  color: #113272;
+
   font-size: 36px;
   cursor: pointer;
   width: 50%;
+}
+.header--logo a{
+  text-decoration: none;
+  color: #113272;
 }
 
 .header--favourite svg {
   background-size: cover;
   width: 35px;
   height: 35px;
+  cursor: pointer;
+}
+.add-favourite svg{
   cursor: pointer;
 }
 

@@ -11,11 +11,11 @@
     <header>
       <nav class="header--container">
         <ul class="nav">
-          <li class="header--logo">TravelNest</li>
+          <li class="header--logo"><a href="../mainPage/index.html">TravelNest</a></li>
           <ul class="header--menuBtn">
             <li class="close-menu" id="close-burger"></li>
             <li class="header--favourite">
-              <svg
+              <a href="../favourite/index.html"><svg
                 width="31"
                 height="29"
                 viewBox="0 0 31 29"
@@ -30,7 +30,8 @@
                   d="M30.0786 10.9042C29.9295 10.4454 29.5329 10.111 29.0554 10.0416L20.1773 8.75154L16.2069 0.706624C15.9934 0.274023 15.5528 6.10352e-05 15.0703 6.10352e-05C14.9858 6.10352e-05 15.0703 24.4693 15.0703 24.4693L23.0111 28.6441C23.4382 28.8685 23.9557 28.8312 24.346 28.5476C24.7363 28.264 24.9317 27.7835 24.8502 27.308L23.3336 18.4657L29.7579 12.2036C30.1034 11.8668 30.2277 11.363 30.0786 10.9042Z"
                   fill="#EEBF00"
                 />
-              </svg>
+              </svg></a>
+              
             </li>
             <li class="header--rub">
               <div id="rub-modal">
@@ -84,9 +85,9 @@
             </div>
 
             <div class="search--main">
-              <form action="">
-                <input type="date" placeholder="дд.мм.гг" />
-                <select name="" id="">
+              <form action="" id="search">
+                <input name="date" type="date" placeholder="дд.мм.гг" />
+                <select name="guest" id="">
                   <option value="1 гость">1 гость</option>
                   <option value="2 гостя">2 гостя</option>
                   <option value="3 гостя">3 гостя</option>
@@ -101,7 +102,7 @@
         <section class="hotel">
           <div class="hotel--view">
             <form action="">
-              <select name="" id="">
+              <select name="order" id="order">
                 <option value="по цене">по цене</option>
                 <option value="по рейтингу">по рейтингу</option>
               </select>
