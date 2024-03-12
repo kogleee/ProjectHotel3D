@@ -1,0 +1,47 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+.form--main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form--main div {
+  width: 40%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.form--main div input {
+  height: 40px;
+  padding-left: 20px;
+  font-size: 20px;
+}
+
+.form--main div label {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 900px) {
+  .form--main div {
+    justify-content: center;
+    align-items: start;
+  }
+
+  .form--main div input {
+    font-size: 16px;
+  }
+  .form--main div label {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 650px) {
+  .form--main {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,166 @@
+.hotelImage {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: 0 -800px;
+  background-repeat: no-repeat;
+  background-image: url(img/3900694fcd35f1b0ef7e9bb0c29c5e13.jpg);
+}
+main {
+  width: 100%;
+  height: 50vh;
+}
+
+.title {
+  color: #113272;
+}
+.button {
+  text-decoration: none;
+}
+
+.container {
+  width: 70vw;
+  background-color: white;
+  padding: 50px;
+}
+
+.container h1 {
+  width: 100%;
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 50px;
+}
+
+.section--title h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.section--title p {
+  font-size: 22px;
+}
+
+hr {
+  margin: 50px 0;
+  border: 3px solid #113272;
+}
+
+.section--preim h2 {
+  font-size: 28px;
+
+  margin-bottom: 20px;
+}
+
+.section--preim ul li {
+  list-style: none;
+  font-size: 20px;
+  margin-top: 15px;
+}
+
+.section--preim ul li:before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #113272;
+  margin-right: 20px;
+}
+
+.section--bottom h2 {
+  font-size: 28px;
+}
+.section--bottom p {
+  margin-top: 20px;
+  font-size: 20px;
+  margin-bottom: 50px;
+}
+
+footer {
+  display: flex;
+  height: 50vh;
+  align-items: center;
+  justify-content: space-around;
+  background: #cccbcb;
+  margin-top: 50px;
+}
+
+.footer--left {
+  display: flex;
+  height: 70%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+.formTitle {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+form label {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+form input {
+  background-color: white;
+  padding-left: 10px;
+  height: 25px;
+  border-radius: 5px;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+form textarea {
+  background: white;
+  resize: none;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.footer--right {
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.footer--right ul li {
+  font-size: 20px;
+  margin-top: 20px;
+}
+.footer--right ul li a {
+  text-decoration: none;
+  color: black;
+}
+.footer--right ul li a:hover {
+  color: #113272;
+  border-bottom: 2px solid #113272;
+}
+
+@media (max-width: 1300px) {
+  .hotelImage {
+    background-position: 0 0;
+  }
+}
+
+@media (max-width: 800px) {
+  footer {
+    flex-direction: column-reverse;
+    height: 100%;
+    padding: 30px 0;
+  }
+  .footer--left {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 80%;
+  }
+  .footer--right {
+    display: none;
+  }
+}

@@ -1,0 +1,135 @@
+.container {
+  margin-top: 50px;
+  width: 80vw;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+main {
+  background-color: white;
+}
+iframe {
+  width: 100%; /* Захват всей доступной ширины */
+  height: 100%; /* Или 100% для захвата всей доступной высоты родительского контейнера */
+  border: none; /* Удаление рамки */
+  overflow: hidden;
+  margin: 0;
+  padding: 0; /* Скрытие полос прокрутки */
+}
+
+.virtual {
+  height: 50vh;
+}
+.main--info {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.main--info h2,
+.main--rating h2 {
+  color: #113272;
+  font-size: 28px;
+}
+
+.main--info p,
+.main--rating p {
+  font-size: 20px;
+}
+
+.main--rating {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.curRate {
+  width: 30%;
+  text-align: center;
+  border-radius: 15px;
+  padding: 15px;
+  background: #113272;
+  color: white;
+}
+
+.setRating {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.setRating p {
+  width: 100%;
+  color: #113272;
+  font-weight: 800;
+  font-size: 20px;
+  cursor: pointer;
+}
+.setRating select {
+  border: 3px solid black;
+  font-size: 20px;
+  width: 40%;
+  height: 40px;
+}
+
+section {
+  background-color: white;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.column h2 {
+  margin-bottom: 50px;
+  color: #113272;
+  font-size: 28px;
+}
+
+form {
+  display: grid;
+
+  grid-template-columns: 30% 30% 30%;
+  grid-auto-flow: dense;
+  gap: 50px;
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+}
+
+form div label {
+  font-size: 24px;
+}
+
+form div input,
+form div select {
+  border: 2px solid black;
+  margin-top: 20px;
+  padding-left: 10px;
+  font-size: 20px;
+  height: 50px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+form button {
+  width: 150%;
+}
+@media (max-width: 800px) {
+  form {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 650px) {
+  .main--rating {
+    margin-top: 50px;
+  }
+  .container {
+    flex-direction: column;
+  }
+}
