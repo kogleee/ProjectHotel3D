@@ -1,14 +1,21 @@
-.hotelImage {
+main {
   width: 100%;
   height: 100%;
   background-size: cover;
-  background-position: 0 -800px;
+  background-position: 0 -500px;
   background-repeat: no-repeat;
   background-image: url(img/3900694fcd35f1b0ef7e9bb0c29c5e13.jpg);
 }
-main {
+.hotelImage {
   width: 100%;
-  height: 50vh;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.shadow {
+  width: 100%;
+  height: 100%;
+  background: black;
 }
 
 .title {
@@ -20,34 +27,46 @@ main {
 
 .container {
   width: 70vw;
-  background-color: white;
   padding: 50px;
 }
 
 .container h1 {
   width: 100%;
-  text-align: center;
-  font-size: 32px;
+  color: white;
+  font-size: 48px;
+  font-weight: 300;
+  margin-top: 50px;
   margin-bottom: 50px;
 }
 
-.section--title h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
+.container p {
+  width: 60%;
+  height: 100%;
+  font-weight: 300;
+  color: white;
+  font-size: 30px;
+  margin-bottom: 100px;
 }
 
-.section--title p {
-  font-size: 22px;
+.container .button {
+  color: white;
+  border: 3px solid #113272;
+  margin-left: 10%;
 }
 
 hr {
   margin: 50px 0;
   border: 3px solid #113272;
 }
-
+.section--preim {
+  margin: auto;
+  width: 70vw;
+  height: 100%;
+  padding: 50px;
+  background-color: white;
+}
 .section--preim h2 {
-  font-size: 28px;
-
+  font-size: 40px;
   margin-bottom: 20px;
 }
 
@@ -81,7 +100,7 @@ footer {
   height: 50vh;
   align-items: center;
   justify-content: space-around;
-  background: #cccbcb;
+  background: #e8e7e7;
   margin-top: 50px;
 }
 
@@ -142,13 +161,99 @@ form textarea {
   border-bottom: 2px solid #113272;
 }
 
+.preim {
+  height: 20vh;
+  background: #113272;
+}
+
+.preim ul {
+  height: 100%;
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
+}
+.preim ul li {
+  height: 65%;
+  width: 15%;
+  padding-left: 50px;
+  font-size: 24px;
+  color: white;
+  border-left: 4px white solid;
+  display: flex;
+  align-items: center;
+}
+.section--preim p {
+  font-size: 28px;
+}
+.section--bottom {
+  margin: auto;
+  margin-top: 50px;
+  width: 70vw;
+  height: 100%;
+  padding: 50px;
+  background-color: white;
+}
+
 @media (max-width: 1300px) {
-  .hotelImage {
+  main {
     background-position: 0 0;
   }
 }
 
+@media (max-width: 1050px) {
+  .container p {
+    width: 90%;
+  }
+
+  .preim ul {
+    gap: 20px;
+  }
+  .preim ul li {
+    padding-left: 20px;
+    font-size: 20px;
+    width: 20%;
+  }
+}
+
 @media (max-width: 800px) {
+  .section--preim,
+  .section--bottom {
+    width: 80vw;
+    padding: 20px;
+  }
+  .section--preim h2 {
+    font-size: 30px;
+  }
+  .preim {
+    height: 45vh;
+  }
+  .preim ul {
+    padding-left: 20px;
+    column-gap: 50px;
+    justify-content: start;
+    height: 100%;
+    flex-wrap: wrap;
+  }
+  .preim ul li {
+    font-size: 18px;
+    height: 30%;
+    width: 25%;
+  }
+  main {
+    height: 100%;
+  }
+  .container {
+    width: 80vw;
+    padding: 40px 0;
+  }
+
+  .container h1 {
+    font-size: 38px;
+  }
+  .container p {
+    font-size: 24px;
+  }
   footer {
     flex-direction: column-reverse;
     height: 100%;

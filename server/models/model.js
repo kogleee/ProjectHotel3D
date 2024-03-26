@@ -3,12 +3,16 @@ require("dotenv").config();
 
 class User {
   constructor() {
-    this.connection = mysql.createConnection({
-      host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-    });
+    try {
+      this.connection = mysql.createConnection({
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
   //User
   async showUser() {

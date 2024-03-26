@@ -1,5 +1,4 @@
 .container {
-  margin-top: 50px;
   width: 80vw;
   display: flex;
   justify-content: space-between;
@@ -18,7 +17,7 @@ iframe {
 }
 
 .virtual {
-  height: 50vh;
+  height: 65vh;
 }
 .main--info {
   width: 60%;
